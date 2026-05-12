@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "provider": "deepseek",
+    "model": "deepseek-chat",
+    "base_url": "https://api.deepseek.com",
+    "splits": "both",
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "num_predict": 16,
+    "timeout_s": 120,
+    "sleep_ms": 0,
+    "prompt_sha": "c2c38587f5c6"
+  },
+  "prompt": "你是一个二分类器。任务：判断一句中文短文本是否为反讽/讽刺。\n反讽=说反话、表面正面但实际负面/嘲讽、或通过语气/emoji表达相反态度。\n你必须结合“文本语义 + 语气（标点/重复/引号/夸张）+ Emoji（如🙂😂😏🙃等的语用）”综合判断；Emoji 可能强化或反转语气，但 Emoji 本身不等于反讽。\n只输出JSON：{\"irony\":0} 或 {\"irony\":1}，不要输出其它任何字符。",
+  "val": {
+    "acc": 0.5562,
+    "f1": 0.5473,
+    "precision": 0.4251,
+    "recall": 0.7682,
+    "examples": 463,
+    "seconds": 376.85261964797974,
+    "examples_per_second": 1.2285970054619524,
+    "parse_failures": 0,
+    "parse_failure_samples": []
+  },
+  "test": {
+    "acc": 0.5497,
+    "f1": 0.5311,
+    "precision": 0.4193,
+    "recall": 0.7424,
+    "examples": 463,
+    "seconds": 389.47015404701233,
+    "examples_per_second": 1.188794558938429,
+    "parse_failures": 0,
+    "parse_failure_samples": []
+}
+}

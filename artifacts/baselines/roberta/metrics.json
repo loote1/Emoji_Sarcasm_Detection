@@ -1,0 +1,46 @@
+{
+  "meta": {
+    "provider": "huggingface",
+    "method": "roberta_finetune",
+    "model": "hfl/chinese-roberta-wwm-ext",
+    "model_name": "hfl/chinese-roberta-wwm-ext",
+    "splits": {
+      "train": "data/emoji_train.csv",
+      "val": "data/emoji_val.csv",
+      "test": "data/emoji_test.csv"
+    },
+    "seed": 42,
+    "threshold": 0.5,
+    "max_len": 160,
+    "batch_size": 16,
+    "lr": 2e-05,
+    "weight_decay": 0.01,
+    "epochs": 10,
+    "patience": 3,
+    "best_epoch": 4,
+    "train_seconds": 110.58228468894958,
+    "class_weights": [
+      1.0,
+      2.0654516220092773
+    ],
+    "device": "cuda"
+  },
+  "val": {
+    "acc": 0.6955,
+    "f1": 0.5495,
+    "precision": 0.5309,
+    "recall": 0.5695,
+    "examples": 463,
+    "seconds": 0.6385204792022705,
+    "examples_per_second": 725.1137826909555
+  },
+  "test": {
+    "acc": 0.6544,
+    "f1": 0.4937,
+    "precision": 0.4727,
+    "recall": 0.5166,
+    "examples": 463,
+    "seconds": 0.6436429023742676,
+    "examples_per_second": 719.3429746402661
+  }
+}
