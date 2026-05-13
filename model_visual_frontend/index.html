@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ESD-ZH Emoji 讽刺检测可视化</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <canvas id="particleCanvas" aria-hidden="true"></canvas>
+    <main class="shell">
+      <section class="hero view view-active" id="home">
+        <div class="hero-copy">
+          <p class="eyebrow">Emoji Sarcasm Detection · Neural Interface</p>
+          <h1>读懂 Emoji 反讽信号</h1>
+          <p class="lead">
+            输入一句中文评论，ESD-ZH 会融合文字与表情线索，判断这句话是正常表达，还是藏着反话和讽刺。
+          </p>
+          <div class="hero-actions">
+            <button class="button primary" id="enterDemo" type="button">立即体验</button>
+          </div>
+        </div>
+        <div class="hero-card" aria-label="模型概览">
+          <div class="scanner"></div>
+          <div class="pulse-orbit">
+            <span>🥺</span>
+            <span>😄</span>
+            <span>🤔</span>
+            <span>😱</span>
+          </div>
+          <div class="signal-stack" aria-label="模型信号">
+            <div>
+              <span>TEXT STREAM</span>
+              <strong>中文语义</strong>
+            </div>
+            <div>
+              <span>EMOJI LAYER</span>
+              <strong>表情线索</strong>
+            </div>
+            <div>
+              <span>ATTENTION MAP</span>
+              <strong>反讽信号</strong>
+            </div>
+          </div>
+          <p>Unicode 字素切分保留复合 emoji，再由注意力层寻找最可疑的表达片段。</p>
+        </div>
+      </section>
+
+      <section class="workspace view" id="demo" aria-hidden="true">
+        <article class="panel input-panel">
+          <div class="section-title">
+            <div>
+              <p class="eyebrow">Interactive Demo</p>
+              <h2>输入一句中文评论</h2>
+            </div>
+            <button class="button tiny" id="sampleButton" type="button">换个样例</button>
+          </div>
+          <textarea id="textInput" rows="7">小心你活不到退休😄😄</textarea>
+          <div class="control-row">
+            <button class="button primary" id="predictButton" type="button">分析这句话</button>
+            <label class="api-toggle">
+              <input id="apiToggle" type="checkbox" checked />
+              <span>使用真实 ESD-ZH 模型</span>
+            </label>
+          </div>
+        </article>
+
+        <article class="panel result-panel">
+          <div class="result-top">
+            <div>
+              <p class="eyebrow">Prediction</p>
+              <h2 id="labelText">等待分析</h2>
+            </div>
+            <div class="probability">
+              <strong id="probabilityText">--%</strong>
+              <span>讽刺概率</span>
+            </div>
+          </div>
+          <div class="meter" aria-hidden="true">
+            <span id="meterFill"></span>
+          </div>
+          <div class="explain-grid">
+            <div>
+              <span class="mini-label">Token 数</span>
+              <strong id="tokenCount">0</strong>
+            </div>
+            <div>
+              <span class="mini-label">Emoji 数</span>
+              <strong id="emojiCount">0</strong>
+            </div>
+            <div>
+              <span class="mini-label">模型结论</span>
+              <strong id="signalText">--</strong>
+              <small id="sourceText">等待输入</small>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
