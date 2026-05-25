@@ -25,6 +25,12 @@
 │   └── baseline_llm_deepseek.py
 ├── prompts/
 │   └── prompts.txt                  # LLM baseline 提示词文件
+├── model_visual_frontend/            # ESD-ZH 模型可视化前端与推理服务
+│   ├── index.html
+│   ├── app.js
+│   ├── styles.css
+│   ├── server.py                     # 本地 HTTP 服务与 /predict 推理接口
+│   └── requirements.txt              # 前端推理服务依赖
 └── artifacts/                       # 训练结果、模型权重和指标
 ```
 
@@ -40,6 +46,35 @@ pip install numpy pandas scikit-learn regex tqdm torch transformers requests
 ```
 
 如果要运行 RoBERTa baseline，首次执行会从 Hugging Face 下载模型 `hfl/chinese-roberta-wwm-ext`。如果要使用 GPU，请先根据你的 CUDA 版本安装对应的 PyTorch。
+
+## 前端可视化
+
+`model_visual_frontend/` 提供一个本地可视化页面，用于输入中文短文本并调用已训练的 ESD-ZH 模型进行反讽概率预测。默认模型文件为 `artifacts/esd_zh/model.pt`。
+
+安装前端推理服务依赖：
+
+```powershell
+pip install -r model_visual_frontend/requirements.txt
+```
+
+启动本地服务：
+
+```powershell
+python model_visual_frontend/server.py --host 127.0.0.1 --port 8080 --device cpu
+```
+
+启动后在浏览器打开：
+
+```text
+http://127.0.0.1:8080/
+```
+
+服务同时提供接口：
+
+- `GET /health`：检查服务和模型状态
+- `POST /predict`：提交 `{"text": "待检测文本"}`，返回预测标签、反讽概率、阈值和分词结果
+
+如果要使用 GPU 推理，可以在已正确安装 CUDA 版 PyTorch 后将 `--device cpu` 改为 `--device cuda`。
 
 ## 数据格式
 
